@@ -34,12 +34,32 @@ const HostPicture = styled.div`
   right: 10px;
 `;
 
+const AvailabilityDiv = styled.div`
+  margin-bottom: 2.5%;
+  font-size: 18px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+`;
+
+const MinimumStayDiv = styled.div`
+  margin-bottom: 3.5%;
+  font-size: 17px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+`
+
+const MinimumStaySpan = styled.span`
+  font-size: 17px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+`
+
 class App extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            listing_id: 0,
+            listing_id: 88,
             listingInfo: {},
             statsInfo: {},
             amenitiesInfo: {},
@@ -65,27 +85,28 @@ class App extends React.Component {
           }
       }).then(res => {
                this.setState({
-                   listingInfo: res.data[id]
+                   listingInfo: res.data[0]
                });
            }).catch(err => {console.log("There was an err retrieving listing info..", err)});
     }
 
     fetchListingStatsFromDB() {
-      const id = this.state.listing_id;
+      const id = Math.ceil(Math.random()*10);
       axios.get('/api/stats', {
           params: {
               listing_id: id
           }
       }).then(res => {
-                // console.log("This is stats data..", res.data);
+                console.log("This is stats data..", res.data[0]);
                 this.setState({
-                    statsInfo: res.data[id]
+                    statsInfo: res.data[0]
                 })
+                console.log("statsinfo..", this.state.statsInfo);
             }).catch(err => console.log("There was an err fetching stats from controller..", err));
     }
 
     fetchListingAmenitiesFromDB() {
-      const id = this.state.listing_id;
+      const id = Math.ceil(Math.random()*2);
       axios.get('/api/amenities', {
         params: {
           listing_id: id
@@ -93,7 +114,7 @@ class App extends React.Component {
       }).then(res => {
             //   console.log("This is amenities data..", res.data);
               this.setState({
-                amenitiesInfo: res.data[id]
+                amenitiesInfo: res.data[0]
               })  
            }).catch(err => console.log("There was an err fetching amenities from controller..", err)); 
     }
@@ -101,7 +122,7 @@ class App extends React.Component {
     fetchRulesFromDB() {
       axios.get('/api/rules', {
         params: {
-          listing_id: 0
+          listing_id: 1
         }
       }).then(res => {
               this.setState({
@@ -111,13 +132,14 @@ class App extends React.Component {
     }
 
     fetchHostInfo() {
-      const id = this.state.listing_id;
+      const id = Math.ceil(Math.random()*13)
+      // const id = this.state.listing_id;
       axios.get('/api/hosts', {
         params: {
           listing_id: id
         }
       }).then(res => this.setState({
-          hostInfo: res.data[id]
+          hostInfo: res.data[0]
       }))
         .catch(err => console.log("There was an err fetching host from controller..", err))
     }
@@ -136,9 +158,6 @@ class App extends React.Component {
         return(
             <div>
                 <Title hostInfo={ this.state.hostInfo } listingInfo={ this.state.listingInfo } />
-                {/* <HostPicture>
-                <img src="" alt="Avatar" id="image"/>
-                </HostPicture> */}
                 <Stats statsInfo={ this.state.statsInfo }/>
                 <Highlights/>
                 <Description listingInfo={ this.state.listingInfo }/>
@@ -152,9 +171,15 @@ class App extends React.Component {
                 </TopAndBottomBorder>
                 <Cancellations/>
                 <TopAndBottomBorder>
+                  <AvailabilityDiv>
+                    Availability
+                  </AvailabilityDiv>
+                  <MinimumStayDiv>
+                    <MinimumStaySpan>2 nights </MinimumStaySpan>minimum stay · Updated today
+                  </MinimumStayDiv>
                   <Calendar onChange={(date) => this.OnChangeForDate()} value={ this.state.date }/>
+                  
                 </TopAndBottomBorder>
-                
             </div>
         )
     }

@@ -2,6 +2,8 @@
     margin-top: 5%;
     margin-left: 17%;
     margin-bottom: 1%;
+    width: 20%;
+    line-height: 115%;
     font-family: 'Merriweather', serif;
     font-weight: 700;
     font-size: 31px;
@@ -51,7 +53,7 @@
 }
 
 .message_container {
-    width: 42em;
+    width: 37em;
 }
 
 .message_header {
