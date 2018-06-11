@@ -3,7 +3,7 @@ const { save } = require('../saveHelper');
 
 amenityController = {
     FETCH: (req, res) => {
-        Amenity.find({listing_id: req.query.listing_id})
+        Amenity.findOne({listing_id: req.query.listing_id})
                .then(data => {res.status(200).send(data); console.log("successfully fetched amenities from db..", data)})
                .catch(err => {res.status(404); console.log("err in retrieving amenities from db..", err)})
     },

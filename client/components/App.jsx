@@ -59,7 +59,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            listing_id: 88,
+            listing_id: 99,
             listingInfo: {},
             statsInfo: {},
             amenitiesInfo: {},
@@ -85,7 +85,7 @@ class App extends React.Component {
           }
       }).then(res => {
                this.setState({
-                   listingInfo: res.data[0]
+                   listingInfo: res.data
                });
            }).catch(err => {console.log("There was an err retrieving listing info..", err)});
     }
@@ -99,7 +99,7 @@ class App extends React.Component {
       }).then(res => {
                 console.log("This is stats data..", res.data[0]);
                 this.setState({
-                    statsInfo: res.data[0]
+                    statsInfo: res.data
                 })
                 console.log("statsinfo..", this.state.statsInfo);
             }).catch(err => console.log("There was an err fetching stats from controller..", err));
@@ -112,9 +112,8 @@ class App extends React.Component {
           listing_id: id
         }
       }).then(res => {
-            //   console.log("This is amenities data..", res.data);
               this.setState({
-                amenitiesInfo: res.data[0]
+                amenitiesInfo: res.data
               })  
            }).catch(err => console.log("There was an err fetching amenities from controller..", err)); 
     }
@@ -126,7 +125,7 @@ class App extends React.Component {
         }
       }).then(res => {
               this.setState({
-                rulesInfo: [...res.data[0].rules]
+                rulesInfo: [...res.data.rules]
              })
            }).catch(err => console.log("There was an err fetching rules from controller..", err));
     }
@@ -139,7 +138,7 @@ class App extends React.Component {
           listing_id: id
         }
       }).then(res => this.setState({
-          hostInfo: res.data[0]
+          hostInfo: res.data
       }))
         .catch(err => console.log("There was an err fetching host from controller..", err))
     }
