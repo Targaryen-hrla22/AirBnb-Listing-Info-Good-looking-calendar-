@@ -177,7 +177,7 @@ class App extends React.Component {
                     <MinimumStaySpan>2 nights </MinimumStaySpan>minimum stay · Updated today
                   </MinimumStayDiv>
                   <Calendar onChange={(date) => this.OnChangeForDate()} value={ this.state.date }/>
-                  
+    
                 </TopAndBottomBorder>
             </div>
         )
