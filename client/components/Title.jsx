@@ -11,9 +11,9 @@ const HostName = styled.div`
   font-weight: 400;
 `;
 
+
 const Title = ({ listingInfo, hostInfo }) => (
     <div>
-      {console.log('this is img src..', hostInfo.picture)}
       <div id='listing_title'>{listingInfo.title}<img id='host_avatar' src={hostInfo.picture} alt=""/></div>
       <HostName>{hostInfo.name}</HostName>
       <div id='listing_location'>{listingInfo.location} </div>

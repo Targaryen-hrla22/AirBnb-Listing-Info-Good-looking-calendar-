@@ -3,7 +3,7 @@ const { save } = require('../saveHelper');
 
 hostController = {
     FETCH: (req, res) => {
-        Host.find({listing_id: req.query.listing_id})
+        Host.findOne({listing_id: req.query.listing_id})
             .then(data => {res.status(200).send(data); console.log("successfully fetched hosts from db..", data)})
     },
 

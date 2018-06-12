@@ -8,7 +8,6 @@
 // `;
 
 // const OutsetBox = () => {
-
 // }
 
 // export default Style;
