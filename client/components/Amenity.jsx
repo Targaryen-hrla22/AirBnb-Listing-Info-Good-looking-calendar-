@@ -19,13 +19,13 @@ const ShowAllAmenities = styled.a`
 const TopAndBottomBorder = styled.div`
   border-top: 1px solid #DBDBDB;
   border-bottom: 1px solid #DBDBDB;
-  width: 32%;
+  width: 35%;
   padding: 2.5% 0;
   margin-left: 17%;
 `;
 
 const AmenityDiv = styled.div`
-  margin-bottom: 10%
+  margin-bottom: 10%;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
   font-size: 17px;

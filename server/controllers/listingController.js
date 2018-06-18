@@ -3,8 +3,8 @@ const { save } = require('../saveHelper');
 
 listingController = {
     FETCH: (req, res) => {
-      console.log("this is req query for listing..", req.query);
-      Listing.findOne({ listing_id: req.query.listing_id })
+      console.log("this is req query for listing..", req.params.id);
+      Listing.findOne({ listing_id: req.params.id })
         .then( data => {res.status(200).send(data); console.log("Successfully fetched listing info from DB...", data)})
         .catch( err => {res.status(404); console.log("Err retrieving listing info from DB...", err)});
     },

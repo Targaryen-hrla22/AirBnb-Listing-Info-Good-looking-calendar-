@@ -1,14 +1,30 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StatsInfo = styled.li`
+display: inline;
+margin-left: 0.5%;
+padding-left: 0.5%;
+padding-right: 0.5%;
+font-family: 'Source Sans Pro', sans-serif;
+font-weight: 300;
+font-size: 16px;
+`;
+
+const StatsDiv = styled.ul`
+margin-left: 14.1%;
+`;
+
 
 const Stats = ( { statsInfo } ) => {
   return (
     <div>
-      <ul id='stats'>
-        <li><i class="fas fa-users"></i> {statsInfo.guests} guests</li>
-        <li><i class="fas fa-door-open"></i> {statsInfo.bedrooms > 1 ? `${statsInfo.bedrooms} bedrooms` : `${statsInfo.bedrooms} bedroom`}</li>
-        <li><i class="fas fa-bed"></i> {statsInfo.beds > 1 ? `${statsInfo.beds} beds` : `${statsInfo.beds} bed`}</li>
-        <li><i class="fas fa-bath"></i> {statsInfo.baths > 1 ? `${statsInfo.baths} baths` : `${statsInfo.baths} bath`}</li>
-      </ul>
+      <StatsDiv>
+        <StatsInfo><i class="fas fa-users"></i> {statsInfo.guests} guests</StatsInfo>
+        <StatsInfo><i class="fas fa-door-open"></i> {statsInfo.bedrooms > 1 ? `${statsInfo.bedrooms} bedrooms` : `${statsInfo.bedrooms} bedroom`}</StatsInfo>
+        <StatsInfo><i class="fas fa-bed"></i> {statsInfo.beds > 1 ? `${statsInfo.beds} beds` : `${statsInfo.beds} bed`}</StatsInfo>
+        <StatsInfo><i class="fas fa-bath"></i> {statsInfo.baths > 1 ? `${statsInfo.baths} baths` : `${statsInfo.baths} bath`}</StatsInfo>
+      </StatsDiv>
     </div>
   )
 }

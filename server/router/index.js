@@ -5,7 +5,9 @@ const { amenityController } = require('../controllers/amenityController.js');
 const { ruleController } = require('../controllers/ruleController');
 const { hostController } = require('../controllers/hostController');
 
-router.route('/listings')
+
+
+router.route('/listings/:id')
       .get(listingController.FETCH)
       .post(listingController.SAVE);
 

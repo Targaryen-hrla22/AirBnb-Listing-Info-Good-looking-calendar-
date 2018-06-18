@@ -14,7 +14,7 @@ import Calendar from 'react-calendar';
 const TopAndBottomBorder = styled.div`
   border-top: 1px solid #DBDBDB;
   border-bottom: 1px solid #DBDBDB;
-  width: 32%;
+  width: 35%;
   padding-top: 2.5%;
   margin-left: 17%;
   padding-bottom: 2.5%;
@@ -26,12 +26,6 @@ const HouseRulesDiv = styled.p`
   font-size: 18px;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
-`;
-
-const HostPicture = styled.div`
-  position: absolute;
-  top: 30px;
-  right: 10px;
 `;
 
 const AvailabilityDiv = styled.div`
@@ -54,12 +48,23 @@ const MinimumStaySpan = styled.span`
   font-weight: 600;
 `
 
+const HostDiv = styled.span`
+  display: inline-block;
+  margin-left: 10%;
+`;
+const HostPic = styled.img`
+  border-radius: 50%;
+`;
+
+
+const dbURL = 'http://ec2-54-86-47-69.compute-1.amazonaws.com:3030'
+
 class App extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            listing_id: 99,
+            listing_id: 1,
             listingInfo: {},
             statsInfo: {},
             amenitiesInfo: {},
@@ -79,7 +84,7 @@ class App extends React.Component {
 
     fetchListingTitleAndLocationFromDB() {
       const id = this.state.listing_id;
-      axios.get('/api/listings', {
+      axios.get(dbURL + `/api/listings/${id}`, {
           params: {
               listing_id: id
           }
@@ -92,7 +97,7 @@ class App extends React.Component {
 
     fetchListingStatsFromDB() {
       const id = Math.ceil(Math.random()*10);
-      axios.get('/api/stats', {
+      axios.get(dbURL + '/api/stats', {
           params: {
               listing_id: id
           }
@@ -107,7 +112,7 @@ class App extends React.Component {
 
     fetchListingAmenitiesFromDB() {
       const id = Math.ceil(Math.random()*2);
-      axios.get('/api/amenities', {
+      axios.get(dbURL + '/api/amenities', {
         params: {
           listing_id: id
         }
@@ -119,7 +124,7 @@ class App extends React.Component {
     }
     
     fetchRulesFromDB() {
-      axios.get('/api/rules', {
+      axios.get(dbURL + '/api/rules', {
         params: {
           listing_id: 1
         }
@@ -131,11 +136,11 @@ class App extends React.Component {
     }
 
     fetchHostInfo() {
-      const id = Math.ceil(Math.random()*13)
+      // const id = Math.ceil(Math.random()*13)
       // const id = this.state.listing_id;
-      axios.get('/api/hosts', {
+      axios.get(dbURL + '/api/hosts', {
         params: {
-          listing_id: id
+          listing_id: 1
         }
       }).then(res => this.setState({
           hostInfo: res.data
@@ -149,14 +154,11 @@ class App extends React.Component {
       });
     }
 
-
-
-
-
     render() {
         return(
-            <div>
+               <div>
                 <Title hostInfo={ this.state.hostInfo } listingInfo={ this.state.listingInfo } />
+                {/* <HostDiv><HostPic src={this.state.hostInfo.picture}></HostPic></HostDiv> */}
                 <Stats statsInfo={ this.state.statsInfo }/>
                 <Highlights/>
                 <Description listingInfo={ this.state.listingInfo }/>
@@ -177,9 +179,9 @@ class App extends React.Component {
                     <MinimumStaySpan>2 nights </MinimumStaySpan>minimum stay · Updated today
                   </MinimumStayDiv>
                   <Calendar onChange={(date) => this.OnChangeForDate()} value={ this.state.date }/>
-    
                 </TopAndBottomBorder>
-            </div>
+                </div>
+              
         )
     }
 }
